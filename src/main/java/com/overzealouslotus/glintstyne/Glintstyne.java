@@ -1,6 +1,10 @@
 package com.overzealouslotus.glintstyne;
 
 import com.mojang.logging.LogUtils;
+import com.overzealouslotus.glintstyne.block.GlintBlocks;
+import com.overzealouslotus.glintstyne.item.GlintItems;
+import com.overzealouslotus.glintstyne.item.GlintTabs;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -23,6 +27,9 @@ public class Glintstyne {
     public Glintstyne(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
+        GlintTabs.register(modEventBus);
+        GlintItems.register(modEventBus);
+        GlintBlocks.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -32,7 +39,6 @@ public class Glintstyne {
 
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }
 

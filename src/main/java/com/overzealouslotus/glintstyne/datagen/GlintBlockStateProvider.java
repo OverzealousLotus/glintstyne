@@ -1,0 +1,26 @@
+package com.overzealouslotus.glintstyne.datagen;
+
+import com.overzealouslotus.glintstyne.Glintstyne;
+import com.overzealouslotus.glintstyne.block.GlintBlocks;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
+
+public class GlintBlockStateProvider extends BlockStateProvider {
+    public GlintBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, Glintstyne.MOD_ID, exFileHelper);
+    }
+
+    @Override
+    protected void registerStatesAndModels() {
+        blockWithItem(GlintBlocks.MOCHITE_BLOCK);
+        blockWithItem(GlintBlocks.RAW_MOCHITE_BLOCK);
+        blockWithItem(GlintBlocks.MOCHITE_ORE);
+    }
+
+    private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+}
