@@ -122,8 +122,19 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+
+    maven {
+        url "https://cursemaven.com/"
+    }
 }
 
+
+// For some dependencies, check CurseForge for if they have a gradle snippet.
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
@@ -133,21 +144,22 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
+    implementation fg.deobf("curse.maven:selene-499980:6301468")
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
+    compileOnly group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.4'
+    compileOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.4'
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
-
 mixin {
     add sourceSets.main, 'glintstyne.refmap.json'
     config 'glintstyne.mixins.json'
@@ -203,7 +215,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            url = "file://${project.projectDir}/mcmodsrepo"
         }
     }
 }

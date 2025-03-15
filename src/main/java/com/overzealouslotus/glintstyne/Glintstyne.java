@@ -1,10 +1,12 @@
 package com.overzealouslotus.glintstyne;
 
-import com.mojang.logging.LogUtils;
 import com.overzealouslotus.glintstyne.block.GlintBlocks;
+import com.overzealouslotus.glintstyne.config.GlintConfig;
+import com.overzealouslotus.glintstyne.datagen.dynamic.GlintDynamics;
 import com.overzealouslotus.glintstyne.item.GlintItems;
 import com.overzealouslotus.glintstyne.item.GlintTabs;
-import net.minecraft.world.item.CreativeModeTabs;
+import com.overzealouslotus.glintstyne.worldgen.placement.GlintPlacementModifierTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -16,20 +18,28 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Glintstyne.MOD_ID)
 public class Glintstyne {
     public static final String MOD_ID = "glintstyne";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
+
+    public static ResourceLocation id(String name) {
+        return new ResourceLocation(MOD_ID, name);
+    }
 
     public Glintstyne(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
+        context.registerConfig(ModConfig.Type.COMMON, GlintConfig.SPEC);
 
-        GlintTabs.register(modEventBus);
+        GlintPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(modEventBus);
         GlintItems.register(modEventBus);
         GlintBlocks.register(modEventBus);
+        GlintTabs.register(modEventBus);
+        GlintDynamics.INSTANCE.register();
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
