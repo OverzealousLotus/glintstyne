@@ -1,6 +1,7 @@
 package com.overzealouslotus.glintstyne.item;
 
 import com.overzealouslotus.glintstyne.Glintstyne;
+import com.overzealouslotus.glintstyne.item.custom.FuelItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,6 +22,9 @@ public class GlintItems {
     public static final RegistryObject<Item> MOCHITE = newItem("mochite",
         () -> new Item(new Item.Properties().food(mochi_food.nutrition(2)
             .saturationMod(1.0f).build())));
+
+    public static final RegistryObject<Item> MORKITE = newItem("morkite",
+        () -> new FuelItem(new Item.Properties(), 3200));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

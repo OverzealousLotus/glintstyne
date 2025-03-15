@@ -1,6 +1,9 @@
 package com.overzealouslotus.glintstyne.datagen;
 
 import com.overzealouslotus.glintstyne.Glintstyne;
+import com.overzealouslotus.glintstyne.datagen.loot.GlintLootProvider;
+import com.overzealouslotus.glintstyne.datagen.tag.ItemTagHandler;
+import com.overzealouslotus.glintstyne.datagen.tag.BlockTagHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -26,9 +29,10 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new GlintBlockStateProvider(output, helper));
         generator.addProvider(event.includeServer(), new GlintItemModelProvider(output, helper));
 
-        GlintTagProvider tagProvider = generator.addProvider(event.includeServer(),
-            new GlintTagProvider(output, provider, helper));
-        generator.addProvider(event.includeServer(), new GlintItemTagProvider(output, provider, tagProvider.contentsGetter(), helper));
+        BlockTagHandler tagProvider = generator.addProvider(event.includeServer(),
+            new BlockTagHandler(output, provider, helper));
+        generator.addProvider(event.includeServer(), new ItemTagHandler(output, provider, tagProvider.contentsGetter(), helper));
 
+        generator.addProvider(event.includeServer(), new GlintWorldGenProvider(output, provider));
     }
 }

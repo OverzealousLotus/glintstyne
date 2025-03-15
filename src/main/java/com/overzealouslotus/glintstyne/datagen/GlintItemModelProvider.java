@@ -19,6 +19,7 @@ public class GlintItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(GlintItems.MOCHITE);
         simpleItem(GlintItems.RAW_MOCHITE);
+        simpleItem(GlintItems.MORKITE);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

@@ -2,9 +2,13 @@
   "item.glintstyne.raw_mochite": "Raw Mochite",
   "item.glintstyne.mochite": "Mochite",
 
+  "item.glintstyne.morkite": "Morkite",
   "block.glintstyne.mochite_block": "Mochite Block",
   "block.glintstyne.raw_mochite_block": "Raw Mochite Block",
   "block.glintstyne.mochite_ore": "Mochite Ore",
+  "block.glintstyne.deepslate_mochite_ore": "Deepslate Mochite Ore",
+
+  "block.glintstyne.deepslate_morkite_ore": "Deepslate Morkite Ore",
 
   "creativetab.glintstyne_tab": "Glintstyne"
 }
