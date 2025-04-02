@@ -20,6 +20,7 @@ public class GlintBlockStateProvider extends BlockStateProvider {
         blockWithItem(GlintBlocks.MOCHITE_ORE);
         blockWithItem(GlintBlocks.DEEPSLATE_MOCHITE_ORE);
         blockWithItem(GlintBlocks.DEEPSLATE_MORKITE_ORE);
+        blockWithItem(GlintBlocks.XP_ORE);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

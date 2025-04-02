@@ -24,14 +24,16 @@ public final class BlockTagHandler extends BlockTagsProvider {
     this.tag(Tags.Blocks.ORES).add(
       GlintBlocks.MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MOCHITE_ORE.get(),
-      GlintBlocks.DEEPSLATE_MORKITE_ORE.get()
+      GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
+      GlintBlocks.XP_ORE.get()
     );
 
     this.tag(BlockTags.NEEDS_IRON_TOOL).add(
       GlintBlocks.MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MOCHITE_ORE.get(),
       GlintBlocks.RAW_MOCHITE_BLOCK.get(),
-      GlintBlocks.MOCHITE_BLOCK.get()
+      GlintBlocks.MOCHITE_BLOCK.get(),
+      GlintBlocks.XP_ORE.get()
     );
 
     this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
@@ -44,7 +46,9 @@ public final class BlockTagHandler extends BlockTagsProvider {
       GlintBlocks.RAW_MOCHITE_BLOCK.get(),
       GlintBlocks.MOCHITE_BLOCK.get(),
 
-      GlintBlocks.DEEPSLATE_MORKITE_ORE.get()
+      GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
+
+      GlintBlocks.XP_ORE.get()
     );
   }
 }

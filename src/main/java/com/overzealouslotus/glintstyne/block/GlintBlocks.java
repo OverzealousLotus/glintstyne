@@ -36,6 +36,12 @@ public class GlintBlocks {
         () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_LAPIS_ORE),
             UniformInt.of(7, 12)));
 
+    public static final RegistryObject<Block> XP_ORE = registerBlock("experience_ore",
+      () -> new DropExperienceBlock(BlockBehaviour.Properties.of().noLootTable(),
+        UniformInt.of(10, 28)));
+
+
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
