@@ -21,4 +21,8 @@ public class GlintOrePlacement {
   public static List<PlacementModifier> rareOrePlacement(int pChance, PlacementModifier pHeightRange) {
     return orePlacement(RarityFilter.onAverageOnceEvery(pChance), pHeightRange);
   }
+
+  public static List<PlacementModifier> glintNoisePlacement(int ratio, double factor, double offset, PlacementModifier heightRange) {
+    return orePlacement(NoiseBasedCountPlacement.of(ratio, factor, offset), heightRange);
+  }
 }
