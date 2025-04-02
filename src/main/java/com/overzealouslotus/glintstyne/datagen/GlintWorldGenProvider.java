@@ -16,9 +16,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class GlintWorldGenProvider extends DatapackBuiltinEntriesProvider {
   public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-      .add(Registries.CONFIGURED_FEATURE, GlintConfiguredFeatures::bootstrap)
-      .add(Registries.PLACED_FEATURE, GlintPlacedFeatures::bootstrap)
-      .add(ForgeRegistries.Keys.BIOME_MODIFIERS, GlintBiomeModifiers::bootstrap);
+    .add(Registries.PLACED_FEATURE, GlintPlacedFeatures::bootstrap)
+    .add(Registries.CONFIGURED_FEATURE, GlintConfiguredFeatures::bootstrap)
+    .add(ForgeRegistries.Keys.BIOME_MODIFIERS, GlintBiomeModifiers::bootstrap);
 
   public GlintWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries, BUILDER, Set.of(Glintstyne.MOD_ID));
