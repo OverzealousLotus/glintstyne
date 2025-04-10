@@ -1,6 +1,7 @@
 package com.overzealouslotus.glintstyne.datagen;
 
 import com.overzealouslotus.glintstyne.Glintstyne;
+import com.overzealouslotus.glintstyne.datagen.lang.LangHandler;
 import com.overzealouslotus.glintstyne.datagen.loot.GlintLootProvider;
 import com.overzealouslotus.glintstyne.datagen.tag.ItemTagHandler;
 import com.overzealouslotus.glintstyne.datagen.tag.BlockTagHandler;
@@ -34,5 +35,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ItemTagHandler(output, provider, tagProvider.contentsGetter(), helper));
 
         generator.addProvider(event.includeServer(), new GlintWorldGenProvider(output, provider));
+
+        generator.addProvider(event.includeClient(), new LangHandler(output, "en_us"));
     }
 }
