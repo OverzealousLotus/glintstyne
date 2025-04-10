@@ -25,30 +25,41 @@ public final class BlockTagHandler extends BlockTagsProvider {
       GlintBlocks.MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
-      GlintBlocks.XP_ORE.get()
+      GlintBlocks.XP_ORE.get(),
+      GlintBlocks.DEEPSLATE_XP_ORE.get(),
+      GlintBlocks.DEEPSLATE_ANCIENT_ORE.get()
     );
 
     this.tag(BlockTags.NEEDS_IRON_TOOL).add(
       GlintBlocks.MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MOCHITE_ORE.get(),
-      GlintBlocks.RAW_MOCHITE_BLOCK.get(),
+      GlintBlocks.ROUGH_MOCHITE_BLOCK.get(),
       GlintBlocks.MOCHITE_BLOCK.get(),
-      GlintBlocks.XP_ORE.get()
+      GlintBlocks.XP_ORE.get(),
+      GlintBlocks.DEEPSLATE_XP_ORE.get()
     );
 
     this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-      GlintBlocks.DEEPSLATE_MORKITE_ORE.get()
+      GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
+      GlintBlocks.ROUGH_MORKITE_BLOCK.get(),
+      GlintBlocks.DEEPSLATE_ANCIENT_ORE.get()
     );
 
     this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
       GlintBlocks.MOCHITE_ORE.get(),
       GlintBlocks.DEEPSLATE_MOCHITE_ORE.get(),
-      GlintBlocks.RAW_MOCHITE_BLOCK.get(),
+      GlintBlocks.ROUGH_MOCHITE_BLOCK.get(),
       GlintBlocks.MOCHITE_BLOCK.get(),
 
       GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
+      GlintBlocks.ROUGH_MORKITE_BLOCK.get(),
 
-      GlintBlocks.XP_ORE.get()
+      GlintBlocks.XP_ORE.get(),
+      GlintBlocks.DEEPSLATE_XP_ORE.get(),
+
+      GlintBlocks.DEEPSLATE_MORKITE_ORE.get(),
+
+      GlintBlocks.DEEPSLATE_ANCIENT_ORE.get()
     );
   }
 }

@@ -52,12 +52,12 @@ public class GlintDynamics extends DynServerResourcesGenerator {
 
   @Override
   public void regenerateDynamicAssets(ResourceManager resourceManager) {
-    if(PlatHelper.isModLoaded("spelunkery")) {
+    /* if(PlatHelper.isModLoaded("spelunkery")) {
       List<String> debug = List.of("deepslate_morkite_ore");
       writeDataFile(resourceManager, debug,
         "glintstyne", "",
         "overrides/loot_tables/", ResType.BLOCK_LOOT_TABLES);
-    }
+    } */
 
   }
 }

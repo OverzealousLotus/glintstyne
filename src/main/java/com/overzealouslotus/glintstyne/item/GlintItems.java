@@ -11,20 +11,25 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class GlintItems {
+public final class GlintItems {
     public static final DeferredRegister<Item> ITEMS =
-        DeferredRegister.create(ForgeRegistries.ITEMS, Glintstyne.MOD_ID);
+      DeferredRegister.create(ForgeRegistries.ITEMS, Glintstyne.MOD_ID);
 
     private static final FoodProperties.Builder mochi_food = new FoodProperties.Builder().fast();
 
     public static final RegistryObject<Item> RAW_MOCHITE = newItem("raw_mochite",
-        () -> new Item(new Item.Properties().food(mochi_food.nutrition(1).build())));
+      () -> new Item(new Item.Properties().food(mochi_food.nutrition(1).build())));
     public static final RegistryObject<Item> MOCHITE = newItem("mochite",
-        () -> new Item(new Item.Properties().food(mochi_food.nutrition(2)
-            .saturationMod(1.0f).build())));
+      () -> new Item(new Item.Properties().food(mochi_food.nutrition(2)
+          .saturationMod(1.0f).build())));
 
     public static final RegistryObject<Item> MORKITE = newItem("morkite",
-        () -> new FuelItem(new Item.Properties(), 3200));
+      () -> new FuelItem(new Item.Properties(), 3200));
+
+    public static final RegistryObject<Item> SMALL_ANCIENT_SHARD = newItem("small_ancient_shard",
+      () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LARGE_ANCIENT_SHARD = newItem("large_ancient_shard",
+      () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

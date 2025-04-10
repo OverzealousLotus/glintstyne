@@ -21,14 +21,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Glintstyne.MOD_ID)
-public class Glintstyne {
+public final class Glintstyne {
     public static final String MOD_ID = "glintstyne";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static ResourceLocation id(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public Glintstyne(FMLJavaModLoadingContext context) {

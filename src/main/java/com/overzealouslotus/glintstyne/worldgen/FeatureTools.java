@@ -1,39 +1,21 @@
 package com.overzealouslotus.glintstyne.worldgen;
 
 import com.overzealouslotus.glintstyne.Glintstyne;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
-
-public class FeatureTools {
-  protected static ResourceKey<ConfiguredFeature<?, ?>> configKey(String name) {
+public final class FeatureTools {
+  static ResourceKey<ConfiguredFeature<?, ?>> configKey(String name) {
     return ResourceKey.create(Registries.CONFIGURED_FEATURE, Glintstyne.id(name));
   }
-
-  protected static <FC extends FeatureConfiguration, F extends Feature<FC>> void newConfig(
-    BootstapContext<ConfiguredFeature<?, ?>> context,
-    ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration
-  ) {
-    context.register(key, new ConfiguredFeature<>(feature, configuration));
+  static ResourceKey<PlacedFeature> placementKey(String name) {
+    return ResourceKey.create(Registries.PLACED_FEATURE, Glintstyne.id(name));
   }
-
-  protected static ResourceKey<PlacedFeature> placementKey(String name) {
-    return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Glintstyne.MOD_ID, name));
-  }
-
-  protected static void newPlacement(
-    BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-    Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers
-  ) {
-    context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
+  static ResourceKey<BiomeModifier> modifierKey(String name) {
+    return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Glintstyne.id(name));
   }
 }

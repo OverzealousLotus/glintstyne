@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +46,10 @@ public final class GlintRecipeProvider extends RecipeProvider implements ICondit
             .save(consumer);*/
 
         mirrorPacking(consumer, GlintItems.MOCHITE.get(), GlintBlocks.MOCHITE_BLOCK.get());
-        mirrorPacking(consumer, GlintItems.RAW_MOCHITE.get(), GlintBlocks.RAW_MOCHITE_BLOCK.get());
+        mirrorPacking(consumer, GlintItems.RAW_MOCHITE.get(), GlintBlocks.ROUGH_MOCHITE_BLOCK.get());
+        mirrorPacking(consumer, GlintItems.MORKITE.get(), GlintBlocks.ROUGH_MORKITE_BLOCK.get());
+        squaredMirrorPacking(consumer, GlintItems.SMALL_ANCIENT_SHARD.get(), GlintItems.LARGE_ANCIENT_SHARD.get());
+        squaredMirrorPacking(consumer, GlintItems.LARGE_ANCIENT_SHARD.get(), Blocks.ANCIENT_DEBRIS);
     }
 
     private static void oreSmelting(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer, ImmutableSet<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
@@ -58,6 +62,10 @@ public final class GlintRecipeProvider extends RecipeProvider implements ICondit
 
     private static void mirrorPacking(@NotNull Consumer<FinishedRecipe> recipeConsumer, ItemLike unpacked, ItemLike packed) {
         nineBlockStorageRecipes(recipeConsumer, RecipeCategory.MISC, unpacked, RecipeCategory.MISC, packed);
+    }
+
+    private static void squaredMirrorPacking(@NotNull Consumer<FinishedRecipe> recipeConsumer, ItemLike unpacked, ItemLike packed) {
+        twoByTwoPacker(recipeConsumer, RecipeCategory.MISC, packed, unpacked);
     }
 
     private static void oreCooking(@NotNull Consumer<FinishedRecipe> recipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> recipeSerializer, ImmutableSet<ItemLike> ingredients, RecipeCategory category, ItemLike result, float exp, int cookingTime, String group, String recipeId) {

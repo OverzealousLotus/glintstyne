@@ -16,11 +16,15 @@ public class GlintBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(GlintBlocks.MOCHITE_BLOCK);
-        blockWithItem(GlintBlocks.RAW_MOCHITE_BLOCK);
+        blockWithItem(GlintBlocks.ROUGH_MOCHITE_BLOCK);
         blockWithItem(GlintBlocks.MOCHITE_ORE);
         blockWithItem(GlintBlocks.DEEPSLATE_MOCHITE_ORE);
         blockWithItem(GlintBlocks.DEEPSLATE_MORKITE_ORE);
+        blockWithItem(GlintBlocks.ROUGH_MORKITE_BLOCK);
         blockWithItem(GlintBlocks.XP_ORE);
+        blockWithItem(GlintBlocks.DEEPSLATE_XP_ORE);
+        blockWithItem(GlintBlocks.DEEPSLATE_ANCIENT_ORE);
+        blockWithItem(GlintBlocks.NEFARIUM_ORE);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
