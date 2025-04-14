@@ -1,5 +1,6 @@
 package com.overzealouslotus.glintstyne;
 
+import com.overzealouslotus.glintstyne.block.GlintBlockEntities;
 import com.overzealouslotus.glintstyne.block.GlintBlocks;
 import com.overzealouslotus.glintstyne.config.GlintConfig;
 import com.overzealouslotus.glintstyne.datagen.dynamic.GlintDynamics;
@@ -36,6 +37,7 @@ public final class Glintstyne {
 
         GlintPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(modEventBus);
         GlintItems.register(modEventBus);
+        GlintBlockEntities.registerBlockEntities(modEventBus);
         GlintBlocks.register(modEventBus);
         GlintTabs.register(modEventBus);
         GlintDynamics.INSTANCE.register();

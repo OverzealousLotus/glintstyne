@@ -51,7 +51,7 @@ public class GlintBlocks {
         UniformInt.of(8, 18)));
 
     public static final RegistryObject<Block> NEFARIUM_ORE = registerBlock("nefarium_ore",
-      () -> new Geyser(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).randomTicks()));
+      () -> new Geyser(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
