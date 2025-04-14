@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BuddingAmethystBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -61,50 +62,39 @@ public class GeyserBlockEntity extends BlockEntity {
 
   @Override
   public void load(@NotNull CompoundTag tag) {
-    super.load(tag);
     this.eruptionDuration = tag.getInt(ERUPTION_DURATION_PATH);
-  }
-
-  @Override
-  public void onLoad() {
-    super.onLoad();
-    final long gameTime = this.getLevel().getGameTime();
-    this.eruptionDuration = (int) (this.originEruptionDuration + gameTime + this.cycleDuration);
+    super.load(tag);
   }
 
   public void tick(Level level, BlockPos myPosition, BlockState myState) {
     final long gameTime = level.getGameTime();
     setChanged(level, myPosition, myState);
     if(this.isErupting()) {
+      if (this.eruptionDuration != 0) this.eruptionDuration -= 1;
       final RandomSource random = level.getRandom();
+      Glintstyne.LOGGER.debug(newGaussianRange(random, -1, 1, 0.4, 0));
       final BlockPos targetPosition = nextTarget(myPosition, random);
       final BlockState targetState = level.getBlockState(targetPosition);
 
-      if (BuddingAmethystBlock.canClusterGrowAtState(targetState) && random.nextInt(7) == 0) {
+      if (BuddingAmethystBlock.canClusterGrowAtState(targetState) && gameTime % 20 == 0) {
         Glintstyne.LOGGER.debug("[ Duration ]: {}", this.eruptionDuration);
-        BlockState newState = Blocks.RAW_IRON_BLOCK.defaultBlockState();
+        BlockState newState = Blocks.RAW_COPPER_BLOCK.defaultBlockState();
         level.setBlockAndUpdate(targetPosition, newState);
         level.playSound(null, myPosition.getX(), myPosition.getY(), myPosition.getZ(),
           SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1, 1
         );
-        this.erupt(myPosition, level);
+        this.erupt(myPosition, level, random);
       }
-    } else {
-      Glintstyne.LOGGER.debug(new StringBuilder()
-        .append("\n [ Cycle Duration ]: ").append(this.cycleDuration)
-        .append("\n [ Eruption Duration ]: ").append(this.eruptionDuration)
-        .append("\n [ Origin Cycle Duration ]: ").append(this.cycleDuration)
-        .append("\n [ Origin Eruption Duration ]: ").append(this.originEruptionDuration)
-        .append("\n [ Game Time ]: ").append(gameTime));
     }
 
-    checkCycle(gameTime);
+    if ((gameTime % this.cycleDuration) == 0) {
+      this.eruptionDuration = this.originEruptionDuration;
+    }
   }
 
-  public void resetEruptionDuration(long gameTime) {
-    this.eruptionDuration = (int) (this.originEruptionDuration + gameTime);
-  }
-
+  /**
+   * @return `true` if eruptionDuration is greater than 0.
+   */
   public boolean isErupting() {
     return this.eruptionDuration > 0;
   }
@@ -121,16 +111,25 @@ public class GeyserBlockEntity extends BlockEntity {
     ));
   }
 
-  private void checkCycle(long gameTime) {
-    if ((gameTime % this.cycleDuration) == 0) {
-      this.resetEruptionDuration(gameTime);
-    }
-  }
-
-  private void erupt(BlockPos myPosition, Level level) {
-    final Arrow arrow = new Arrow(level, myPosition.getX(), myPosition.above().getY(), myPosition.getZ());
-    arrow.shoot(myPosition.above().getX() + 3, myPosition.above().getY() + 3, myPosition.above().getZ() + 3, 1.0F, 0.8F);
+  private void erupt(BlockPos myPosition, Level level, RandomSource random) {
+    final Vec3 center = myPosition.getCenter();
+    final Arrow arrow = new Arrow(level, center.x(), center.y() + 1, center.z());
+    arrow.shoot(
+      newGaussianRange(random, -1, 1, 0.4, 0),
+      15,
+      newGaussianRange(random, -1, 1, 0.4, 0),
+      1.0F, 0.8F
+    );
     arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
     level.addFreshEntity(arrow);
+  }
+
+  /**
+   * @param deviation Offset from average?
+   * @param mean Average
+   * @return New `double` within constraints. If overshot, default to min/max.
+   */
+  private double newGaussianRange(RandomSource random, int min, int max, double deviation, double mean) {
+    return Math.max(min, Math.min(max, random.nextGaussian() * deviation + mean));
   }
 }
